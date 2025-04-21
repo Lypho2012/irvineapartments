@@ -1,0 +1,29 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+backend/__pycache__
+frontend/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+backend/client_secret_1068627222746-5m9ojctormoh4s0mbi97657b2osoc9p2.apps.googleusercontent.com.json
+.venv
+backend/token.json
+backend/plans.json

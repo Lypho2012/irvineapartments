@@ -41,6 +41,10 @@ async def getTodayReport():
     for plan in plans.keys():
         message += plan + ": " + get_latest_movein(plans[plan]["url"],plans[plan]["name"],driver) + "\n"
 
+    print(message)
     gmail_send_message(message)
     print("Email sent")
     driver.quit()
+
+if __name__ == "__main__":
+    getTodayReport()

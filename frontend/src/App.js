@@ -11,7 +11,7 @@ function App() {
       const currentHour = now.getHours();
       const currentMinute = now.getMinutes();
       console.log(currentHour,currentMinute)
-      if (currentHour > 9 && (!prevEmailDate || prevEmailDate.getDate() != now.getDate() && prevEmailDate.getMonth() != now.getMonth() && prevEmailDate.getFullYear() != now.getFullYear())) {
+      if (currentHour >= 9 && (!prevEmailDate || prevEmailDate.getDate() != now.getDate() && prevEmailDate.getMonth() != now.getMonth() && prevEmailDate.getFullYear() != now.getFullYear())) {
         console.log("Getting today's report...");
         axios.post('http://localhost:8000/get-today-report');
         setPrevEmailDate(now);

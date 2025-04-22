@@ -105,6 +105,7 @@ def gmail_send_message(content):
 
         message.set_content(content)
 
+        load_dotenv()
         email = os.getenv('EMAIL')
 
         message["To"] = email

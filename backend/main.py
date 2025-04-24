@@ -2,8 +2,6 @@
 Start server by running fastapi dev main.py
 Activate venv with source ./.venv/bin/activate
 """
-from selenium import webdriver
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -29,22 +27,18 @@ app.add_middleware(
 @app.post("/get-today-report")
 async def getTodayReport():
     print("Sending email...")
-    driver = webdriver.Chrome()
-    driver.maximize_window()
-    driver.implicitly_wait(10)
-
+    
     plans = {}
     with open("plans.json","r") as file:
         plans = json.load(file)
     
     message = ""
     for plan in plans.keys():
-        message += plan + ": " + get_latest_movein(plans[plan]["url"],plans[plan]["name"],driver) + "\n"
+        message += plan + ": " + get_latest_movein(plans[plan]["url"],plans[plan]["name"]) + "\n"
 
     print(message)
     gmail_send_message(message)
     print("Email sent")
-    driver.quit()
 
 if __name__ == "__main__":
     getTodayReport()

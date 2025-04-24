@@ -19,7 +19,10 @@ from google.auth.transport.requests import Request
 import os
 from dotenv import load_dotenv
 
-def get_latest_movein(url,plan,driver):
+def get_latest_movein(url,plan):
+    driver = webdriver.Chrome()
+    driver.maximize_window()
+    driver.implicitly_wait(10)
     driver.get(url)
 
     #click to expand plan
@@ -53,6 +56,10 @@ def get_latest_movein(url,plan,driver):
             driver.set_window_size(1280, 800)
             driver.maximize_window()
             driver.implicitly_wait(10)
+            soup = BeautifulSoup(driver.page_source, 'html5lib')
+            results = soup.find_all("span", attrs = {'class':'flatpickr-day','tabindex':'-1'})
+            for res in results:
+                days.add(res['aria-label'])
         except:
             # print("Didn't click expected movein")
             pass
@@ -74,6 +81,7 @@ def get_latest_movein(url,plan,driver):
 
     days = list(days)
     days.sort(key=lambda x: datetime.strptime(x, "%B %d, %Y"))
+    driver.quit()
     return days[-1] if len(days) > 0 else "None"
 
 def gmail_send_message(content):

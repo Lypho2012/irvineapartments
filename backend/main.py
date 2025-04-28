@@ -26,6 +26,9 @@ app.add_middleware(
 
 @app.post("/get-today-report")
 async def getTodayReport():
+    getTodayReport_aux()
+
+def getTodayReport_aux():
     print("Sending email...")
     
     plans = {}
@@ -41,4 +44,4 @@ async def getTodayReport():
     print("Email sent")
 
 if __name__ == "__main__":
-    getTodayReport()
+    getTodayReport_aux()
